@@ -1,12 +1,6 @@
-/* Un identificador puede ser reconocido por un diagrama de transición y/o tabla de transición, así
- entonces, debe implementar en el lenguaje de programación C o C++ los siguientes programas:
-
-b)Implemente, el algoritmo por tablas de transición para el reconocimiento de un
-identificador
-
-*/
-
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
 int main()
 {
@@ -19,7 +13,19 @@ int main()
         }
         cout << endl;
     }
-    string input = "temp1;";
+    string input;
+    ifstream archivo;
+    archivo.open("input.txt");
+    if (archivo.fail())
+    {
+        cout << "Error al abrir el archivo" << endl;
+        return 0;
+    }
+    while (!archivo.eof())
+    {
+        getline(archivo, input);
+    }
+    
     int tam = input.size();
     char simbolo = input[0];
     int estado = 0;
