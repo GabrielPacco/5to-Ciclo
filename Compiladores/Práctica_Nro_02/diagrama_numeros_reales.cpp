@@ -2,6 +2,7 @@
 using namespace std;
 
 enum class estado{INICIO,Q1,Q2,Q3,Q4};
+
 estado reconocerNum(string& entrada) {
 	int i = 0;
 	estado actual = estado::INICIO;

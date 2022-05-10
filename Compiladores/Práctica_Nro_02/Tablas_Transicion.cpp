@@ -10,7 +10,7 @@ identificador
 using namespace std;
 int main()
 {
-    int M [3][3] = {{1, 2, -1}, {-1,-1,-1}, {2,2,100}};
+    int M [3][3] = {{1, 2, -1}, {-1,-1,-1}, {2, 2, 100}};
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
@@ -19,16 +19,16 @@ int main()
         }
         cout << endl;
     }
-    string input = "temp1;";
-    int tam = input.size();
+    string input = "temp1";
     char simbolo = input[0];
     int estado = 0;
-    int sim, d = -1;
+    int sim;
+    int d = -1;
     do{
         d++;
         simbolo = input[d];
-        if (isalpha(simbolo)) sim = 0;
-        else if (isdigit(simbolo)) sim = 1;
+        if (isdigit(simbolo)) sim = 0;
+        else if (isalpha(simbolo)) sim = 1;
         else if (simbolo == '\0') sim = 2;
         else
         {
@@ -48,9 +48,11 @@ int main()
             cout << "Error" << endl;
             break;
         }
-        estado = 100;
     }
-    while (simbolo != '\0');
-    
+    while (estado != 100);
+    if (estado == 100)
+    {
+        cout << "Correcto" << endl;
+    }
     return 0;   
 }

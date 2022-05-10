@@ -10,35 +10,36 @@ identificador.
 using namespace std;
 
 int main(){
-    string input = "temp1;";
+    string input = "temp1";
 
     char simbolo = input[0];
     int estado = 1;
     int d = 0;
+    simbolo = input[d];
 
-    while(simbolo != input[size(input)]){
+    while(simbolo != '\0'){
         switch(estado){
-            case1:
-                if(isdigit(simbolo)) estado = 2;
-                else if(isalpha(simbolo)) estado = 3;
+            case 1:
+                if(isdigit(simbolo)){ estado = 2;}
+                else if(isalpha(simbolo)){ estado = 3;}
                 else{
                     cout<< "Error "<< endl;
-                    break;
                 }
-            case2:
+                break;
+            case 2:
                 cout<< "Error "<< endl;
                 break;
-
-            case3:
-                if(isalpha(simbolo)) estado = 3;
-                else if(isdigit(simbolo)) estado = 3;
+            case 3:
+                if(isalpha(simbolo)) {estado = 3;}
+                else if(isdigit(simbolo)) {estado = 3;}
                 else{
                     cout<< "Error "<<endl;
-                    break;}
-        }
+                }
+                break;
+            }
         d++;
         simbolo=input[d];
-        cout<<"Correcto "<< endl;
+        cout<<"Leido correctamente "<< endl;
     }
     if(estado!=3)
     cout<<"Error "<< endl;

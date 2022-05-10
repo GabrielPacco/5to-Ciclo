@@ -2,29 +2,44 @@
 #include <fstream>
 #include <string>
 using namespace std;
-int main()
+
+void createMat(int **&mat, int i, int j)
 {
-    int M [3][3] = {{1, 2, -1}, {-1,-1,-1}, {2,2,100}};
-    for (int i = 0; i < 3; i++)
+    mat = new int *[5];
+    for (int i = 0; i < 5; i++)
     {
-        for (int j = 0; j < 3; j++)
+        mat[i] = new int[4];
+    }
+}
+void printMat(int **mat, int i, int j)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 4; j++)
         {
-            cout << M[i][j] << " ";
+            cout << mat[i][j] << " ";
         }
         cout << endl;
     }
-    string input;
-    ifstream archivo;
-    archivo.open("input.txt");
-    if (archivo.fail())
+}
+
+int main()
+{
+    ifstream inFile("input.txt");
+    int **mat;
+    int i = 0;
+    int j = 0;
+    createMat(mat, i, j);
+    while (inFile >> mat[i][j])
     {
-        cout << "Error al abrir el archivo" << endl;
-        return 0;
+        j++;
+        if (j == 4)
+        {
+            j = 0;
+            i++;
+        }
     }
-    while (!archivo.eof())
-    {
-        getline(archivo, input);
-    }
+    printMat(mat, i, j);
     
     int tam = input.size();
     char simbolo = input[0];
