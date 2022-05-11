@@ -3,16 +3,18 @@
 using namespace std;
 
 int main(){
-    string input = "temp1;";
+    string input = ".";
 
     char simbolo = input[0];
     int estado = 1;
     int d = 0;
 
-    while(simbolo != input[size(input)]){
+    while(simbolo != '\0'){
         switch(estado){
             case1:
-                if(isdigit(simbolo)) estado = 2;
+                if (simbolo == '+' or simbolo == '-') {
+				    estado = 2;
+                }      
                 else if(isalpha(simbolo)) estado = 3;
                 else{
                     cout<< "Error "<< endl;
@@ -27,11 +29,12 @@ int main(){
                 else if(isdigit(simbolo)) estado = 3;
                 else{
                     cout<< "Error "<<endl;
-                    break;}
+                }
+                break;
         }
         d++;
         simbolo=input[d];
-        cout<<"Correcto "<< endl;
+        cout<<"Leido "<< endl;
     }
     if(estado!=3)
     cout<<"Error "<< endl;

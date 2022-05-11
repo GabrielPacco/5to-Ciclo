@@ -1,17 +1,22 @@
 #include <iostream>
 using namespace std;
 
-enum class estado{INICIO,Q1,Q2,Q3,Q4};
+enum class estado{inicial,Q1,Q2,Q3,Q4};
 
-estado reconocerNum(string& entrada) {
+estado read_dig(string& input)
+{
 	int i = 0;
-	estado actual = estado::INICIO;
+	estado actual = estado::inicial;
 	bool rechazada = false;
-	while (not rechazada and i < entrada.size()) {
-		char simbolo = entrada[i];
+
+	while (rechazada == false && i < input.size()) {
+		char simbolo = input[i];
 		switch (actual) {
-		case estado::INICIO:
-			if (isdigit(simbolo)) {
+		case estado::inicial:
+			if (simbolo == '.'){
+				actual = estado::Q2;
+			}
+			else if (isdigit(simbolo)) {
 				actual = estado::Q3;
 			}
 			else if (simbolo == '+' or simbolo == '-') {
@@ -67,15 +72,15 @@ estado reconocerNum(string& entrada) {
 	}
 	return actual;
 }
+
 int main() {
-	string entrada;
-	cout << "ingrese numero: ";
-	cin >> entrada;
-	estado aceptacion = reconocerNum(entrada);
+	string input = ".73";
+	
+	estado aceptacion = read_dig(input);
 	if (aceptacion == estado::Q3) {
-		cout << "aceptado";
+		cout << "cadena aceptada";
 	}
 	else if (aceptacion == estado::Q4) {
-		cout << "aceptado";
+		cout << "cadena aceptada";
 	}
 }
