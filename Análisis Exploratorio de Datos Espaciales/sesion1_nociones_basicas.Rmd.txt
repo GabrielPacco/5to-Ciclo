@@ -1,0 +1,175 @@
+---
+title: "Nociones basicas de R"
+output: html_notebook
+---
+En lenguaje R se puede usar como una calculadora
+
+```{r}
+3+3 ; 3*7+5; 2/8; 2^8; sin(pi/4); pi; exp(1); gamma(3.4)
+```
+Existen constantes predeterminadas en R por ejemplo $\pi$ o $e$ 
+```{r}
+pi ; exp(1)
+```
+# Vectores 
+En R se definen los vectores de la sgte forma 
+```{r}
+x = c(1.2,3,7,10); x1 = c("hola mundo", "alianza lima campeon");
+x2 = c(4,5,"hola que tal")
+x ; x1; x2
+```
+Existen vectores por defecto en R 
+```{r}
+# vector secuencial ascendente 
+1:10
+# secuencia de un numero hacia otro 
+seq(0,5,0.2)
+```
+Si uno requiere funciones o argumentos mas especificos es necesario 
+
+- se busca en el help 
+- se programa una funcion especifica 
+
+```{r}
+# usando el help 
+help("seq")
+```
+Se puede usar para el help el comando `?seq`. De esta forma puedo crear funciones mas especificas 
+```{r}
+seq(1, 5, length.out=20 )
+```
+Se puede repetir un vector usando el comando `rep` 
+```{r}
+rep(x,2); rep(x1,2)
+# el help para argumentos especificos
+?rep
+```
+Para saber la longitud de un vector en R se usa el comando `length`
+```{r}
+length(x); length(rep(x,2))
+```
+## Seleccion de elementos de un vector 
+Para seleccion un elemento de un vector se usa `x[indice]`
+```{r}
+x
+x[1]; x[c(4,3)]
+```
+
+```{r}
+x4 = -5:10; x4; x4[c(1,7,13)] ; x4[2:8]
+```
+# Matrices 
+Para definir matrices 
+```{r}
+matrix(c(2,3,5,7),nrow=2,ncol=2)
+matrix(c(2,3,5,7),nrow=2,ncol=2, byrow = TRUE)
+matrix(c(2,3,5,7,11,1,3,13,20),3,3, byrow = TRUE)
+matrix(c(2,3,5,7,11,1),3,2, byrow = TRUE)
+```
+Se puede construir matrices uniendo vectores 
+```{r}
+w1 = c(5,8,9) ; w2 = 1:3
+```
+para crear una matriz usando los vectores como columna
+```{r}
+cbind(w1,w2)
+```
+para crear una matriz usando los vectores como filas
+```{r}
+rbind(w1,w2)
+```
+## dimension de una matriz 
+Para la dimension de un matriz 
+```{r}
+A=matrix(c(2,3,5,7,11,1,3,13,20),3,3, byrow = TRUE) ; A
+# dimension de la matriz 
+dim(A)
+# solo el numero de filas 
+dim(A)[1]
+# solo el numero de columnas 
+dim(A)[2]
+B=matrix(c(2,3,5,7,11,1),3,2, byrow = TRUE);B
+dim(B)[2]
+```
+Tambien se puede usar los comandos `nrow` y `ncol`
+```{r}
+nrow(A); nrow(B)
+ncol(A); ncol(B)
+```
+## Seleccion de elementos de una matriz
+Para seleccionar un elemento de una matriz se tiene 
+```{r}
+A
+A[2,3]; A[2,]; A[,3]; A[1:2,]; A[,c(1,3)]
+```
+Otra forma 
+```{r}
+A ; A[-1,]; A[,-3]
+```
+# Valores logicos
+Los valores logicos en R son `TRUE` y `FALSE` pero pueden ser abreviados por `T` y `F` respectivamente
+```{r}
+x = TRUE; y = FALSE; x1 =T ;  y1=F
+x;y;x1;y1
+```
+se puede crear vectores con los valores logicos 
+```{r}
+x2 = c(T,F,T,F) ; y2 = c(T,T,F,F)
+x2;y2
+```
+Los valores logicos pueden funcionar como numeros `TRUE=1` y `FALSE=0`
+```{r}
+2*x2; -3*y2
+```
+# Operadores Relacionales 
+En `R` se pueden comparar dos cantidades por medio de los operadores relaciones (orden)
+```{r}
+# igualdad, mayor , menor, diferente, mayor o igual,  menor o igual
+3 == 4;4<5; 4>5; 4!=5; 4<=5; 4>=5
+```
+# Operadores logicos comparando valores logicos
+```{r}
+TRUE & TRUE; x2&y2; cbind(x2,y2,x2&y2)
+```
+```{r}
+TRUE | FALSE ; x2 | y2
+
+```
+
+```{r}
+!TRUE; x2; !x2 ; !x2 & y2
+```
+
+```{r}
+cbind(x2,y2,x2 & y2); cbind(x2,y2,x2 | y2)
+```
+# Graficos Basicos 
+Para graficar se usa de forma general el comando `plot`, Sin embargo para obtener mas detalles es nesario ver el `help`
+```{r}
+# ayuda del comando 
+?plot
+```
+Ejemplos de graficos
+```{r}
+x = seq(-5,5,0.1)
+y  = x^2 +1
+y3 = sin(x) + cos(x)
+plot(x,y,col="red",type = "l", lwd=2, las=1, cex.axis=1.5,xlab = "eje x", ylab = "eje y", cex.lab = 1.5)
+```
+# Seleccion de una muestra 
+El comando general para seleccionar un muestra de un conjunto de datos en `R` es `sample`. Si el muestreo es con reemplazo entonces se usa el argumento `replace=TRUE` si es sin reemplazo se indica `replace=FALSE`
+```{r}
+?sample
+# asume que todos los elementos tiene igual probabilidad de ser seleccionados
+z = 1:20 
+# con reemplazo
+sample(z, 7, replace = T)
+# sin reemplazo
+sample(z, 7, replace = F)
+```
+Con el comando  `sample` por defecto se considera que todos los elementos tienen la misma probabilidad. Sin embargo se puede indicar los **pesos** para cada elemento del conjunto 
+```{r}
+z1 = 1:5 ;z1
+w = c(5,5,35,35,20)
+sample(z1,3,replace = T, prob = w)
+```
