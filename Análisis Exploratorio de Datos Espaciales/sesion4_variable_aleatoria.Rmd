@@ -1,0 +1,70 @@
+---
+title: "Cuarta sesion: Variables aleatorias discretas"
+output: html_notebook
+---
+Sea $X$ una v.a discreta con funcion masa de probabilidad, $p(x)$, el valor esperado de $X$ es definido como 
+\[
+E[X]= x_1p(x_1)+x_2p(x_2)+\ldots+x_np(x_n)+ \ldots = \sum_{i\geq 1} x_{i}\cdot p(x_{i})  
+\]
+Si $E[X]<\infty$ se dice que la E[X] existe y si $E[X]=\infty$ se dice que E[X] no existe.  
+
+# Ejemplo: Valor esperado de una v.a discreta
+En el juego de la ruleta se tiene 38 resultados. En que los 18 primeros numeros son de color rojo, 18 numeros siguientes son de color negro y existen 2 opciones marcadas con **0** y **00**. 
+
+Una persona gana \$2 si la ruleta marca el color rojo caso contrario pierde 2 dolares.  
+Calcule el valor esperado del juego si cada opcion es igualmente probable.
+
+**Solución teórica**
+
+Sea $X_i$ la ganancia del juego de la ruleta
+\[ X_i = -2, 2 \]  
+Las probabilidades 
+\begin{align*}
+P(X=2)&=p(2)=\frac{18}{38}\\
+P(X=-2)&=p(-2)=\frac{20}{38}
+\end{align*}
+Luego el valor esperado es igual a 
+\[
+E[X] = 2*\frac{18}{38} - 2*\frac{20}{38} = -\frac{4}{38} = -0.1052632
+\]
+
+\[
+Var[X] = E[X^2]-(E[X])^2
+\]
+\[
+E[X^2] = 2^2\cdot\frac{18}{38} + (-2)^2\cdot\frac{20}{38} = \frac{152}{38}=4
+\]
+la varianza es dado por 
+\[
+Var[X] = 4 - (-0.1052632)^2 = 3.98892
+\]
+**Simulacion**
+```{r}
+n=10000
+xs = numeric(n)
+ruleta = 1:38
+for (i in 1:n){
+  xs[i] = if( sample(ruleta,1)<=18 ) 2 else -2
+ }
+mean(xs)
+var(xs)
+```
+mostrando el grafico
+```{r}
+plot(1:n, cumsum(xs)/1:n, type="l", lwd=2, col="red", las=1, ylab = "valor esperado", xlab = "juegos")
+abline(h=-4/38, col="blue", lwd=2)
+```
+
+# Ejercicio
+Para participar en este juego es necesario pagar 5 soles. El juego consiste en lanzar un dado honesto y observar el resultado y ademas 
+
+- Si el resultado del dado es 1,2 o 3 entonces ud. pierde los 5 soles
+
+- Si el resultado del dado es igual a 4 o 5 entonces se le devuelve los 5 soles
+
+- Si el resultado del dado es igual a 6 entonces ud. gana 15 soles.
+
+Sea $W$ la v.a que representa la ganancia del juego. Calcule el valor esperado de la v.a $W$.
+**Solución teórica**
+
+**Simulacion**
